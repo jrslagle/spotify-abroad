@@ -11,7 +11,7 @@ from pages import index, predictions, insights, process
 
 # Navbar docs: https://dash-bootstrap-components.opensource.faculty.ai/l/components/navbar
 navbar = dbc.NavbarSimple(
-    brand='YOUR APP NAME',
+    brand='YOUR APP NAME',  # appears in navigation bar
     brand_href='/', 
     children=[
         dbc.NavItem(dcc.Link('Predictions', href='/predictions', className='nav-link')), 
@@ -74,6 +74,7 @@ def display_page(pathname):
         return process.layout
     else:
         return dcc.Markdown('## Page not found')
+
 
 # Run app server: https://dash.plot.ly/getting-started
 if __name__ == '__main__':
