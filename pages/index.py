@@ -5,47 +5,51 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.express as px
+import plotly.graph_objects as go
+import datashader as ds
+import pandas as pd
+import numpy as np
+import colorcet as cc
+from map import get_map
 
 # Imports from this application
 from app import app
 
-# 2 column layout. 1st column width = 4/12
+# 2 row layout. 1st column width = 4/12
 # https://dash-bootstrap-components.opensource.faculty.ai/l/components/layout
-column1 = dbc.Col(
+row1 = dbc.Row(
     [
         dcc.Markdown(
-            """
-        
-            ## Your Value Proposition
-
-            Emphasize how the app will benefit users. Don't emphasize the underlying technology.
-
-            ✅ RUN is a running app that adapts to your fitness levels and designs personalized workouts to help you improve your running.
-
-            ❌ RUN is the only intelligent running app that uses sophisticated deep neural net machine learning to make your run smarter because we believe in ML driven workouts.
-
+            """        
+            ## See where your music falls in the map of music
             """
         ),
-        dcc.Link(dbc.Button('Your Call To Action', color='primary'), href='/predictions')
+        # dcc.Link(dbc.Button('Your Call To Action', color='primary'), href='/predictions')
     ],
-    md=4,
+    # md=4,
 )
 
-gapminder = px.data.gapminder()
-fig = px.scatter(gapminder.query("year==2007"),
-                 x="gdpPercap",
-                 y="lifeExp",
-                 size="pop",
-                 color="continent",
-                 hover_name="country",
-                 log_x=True,
-                 size_max=60,
-                 )
+# gapminder = px.data.gapminder()
+# fig = px.scatter(gapminder.query("year==2007"),
+#                  x="gdpPercap",
+#                  y="lifeExp",
+#                  size="pop",
+#                  color="continent",
+#                  hover_name="country",
+#                  log_x=True,
+#                  size_max=60,
+#                  )
 
-column2 = dbc.Col(
+favorites = [
+    '1xShPgQbOUa98avWJQFDBY',  # Personal Jesus - Depeche Mode
+    '4ChBLndekjzQveHPsn3r6W',  # Let It Be (feat. Veela) - Blackmill
+    '1pbHy9VBpSyZh56xuujZz0',  # In The Dark - DEV
+]
+
+row2 = dbc.Row(
     [
-        dcc.Graph(figure=fig),
+        dcc.Graph(figure=get_map(highlight=favorites))
     ]
 )
 
-layout = dbc.Row([column1, column2])
+layout = dbc.Col([row1, row2])
