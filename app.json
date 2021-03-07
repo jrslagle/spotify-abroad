@@ -45,7 +45,7 @@
   ],
   "buildpacks": [
     {
-      "url": "https://github.com/stomita/heroku-buildpack-phantomjs"
+      "url": "https://github.com/conda/conda-buildpack.git"
     }
   ],
   "environments": {
